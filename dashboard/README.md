@@ -17,6 +17,11 @@ $ npm run start
 $ npm run generate
 ```
 
+```
+Python Server
+$ python -m http.server
+```
+
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Special Directories

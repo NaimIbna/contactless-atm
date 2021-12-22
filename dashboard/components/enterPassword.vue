@@ -6,6 +6,7 @@
       placeholder="PIN No"
       aria-label=""
       v-model="password"
+      autofocus
     />
     <div class="mt-5">
       <div class="keyboard">
