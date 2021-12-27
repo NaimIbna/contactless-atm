@@ -1,0 +1,17 @@
+.medium-btn {
+  width: 300px;
+  height: 130px;
+  font-size: 2em;
+}
+
+.large-btn {
+  width: 340px;
+  height: 200px;
+  font-size: 3em;
+}
+
+.user-input {
+  max-width: 700px;
+  height: 70px;
+  margin: auto;
+}

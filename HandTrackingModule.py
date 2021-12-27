@@ -63,8 +63,8 @@ class handDetector():
 
     def fingersUp(self):
         fingers = []
-        #print(self.lmList)
-        #print(self.tipIds)
+        # print(self.lmList)
+        # print(self.tipIds)
 
         # Thumb
         if len(self.lmList) != 0 and self.lmList[self.tipIds[0]][1] > self.lmList[self.tipIds[0] - 1][1]:
@@ -98,6 +98,7 @@ class handDetector():
 
         return length, img, [x1, y1, x2, y2, cx, cy]
 
+
 def main():
     pTime = 0
     cTime = 0
@@ -108,16 +109,17 @@ def main():
         img = detector.findHands(img)
         lmList, bbox = detector.findPosition(img)
         if len(lmList) != 0:
-            #print(lmList[4])
+            # print(lmList[4])
             cTime = time.time()
             fps = 1 / (cTime - pTime)
             pTime = cTime
 
-            #cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
+            # cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
             #            (255, 0, 255), 3)
 
-            #cv2.imshow("Image", img)
+            # cv2.imshow("Image", img)
             cv2.waitKey(1)
+
 
 if __name__ == "__main__":
     main()

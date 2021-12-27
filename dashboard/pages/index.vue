@@ -1,9 +1,10 @@
 <template>
   <div class="text-center my-5">
     <div v-if="step == 1">
-      <h2>Welcome To</h2>
+      <h1>Welcome</h1>
+      <h2>To</h2>
       <h3>Contactless ATM</h3>
-      <button @click="step = 2" class="my-5 btn btn-lg btn-primary">
+      <button @click="step = 2" class="my-5 btn btn-lg btn-primary large-btn">
         Start
       </button>
     </div>

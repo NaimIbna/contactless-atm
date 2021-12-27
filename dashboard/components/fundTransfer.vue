@@ -1,6 +1,6 @@
 <template>
   <div class="container my-5">
-    <button class="btn btn-lg btn-success" @click="reloadPage()">
+    <button class="btn btn-lg btn-success medium-btn" @click="reloadPage()">
       Back to home
     </button>
   </div>

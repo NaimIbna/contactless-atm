@@ -1,8 +1,8 @@
 <template>
   <div class="container my-5 text-center">
-    <h2>Face Recognition</h2>
+    <h1>Face Recognition</h1>
     <div class="camera-view"></div>
-    <button class="btn btn-lg btn-primary" @click="$emit('next-step')">Next</button>
+    <button class="btn btn-lg btn-primary medium-btn" @click="$emit('next-step')">Next</button>
   </div>
 </template>
 

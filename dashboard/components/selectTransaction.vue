@@ -4,13 +4,13 @@
       <h2 class="my-5">Select Transaction Type</h2>
       <div class="my-3">
         <button
-          class="mx-2 btn btn-lg btn-primary"
+          class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'fund-transfer'"
         >
           Fund Transfer
         </button>
         <button
-          class="mx-2 btn btn-lg btn-primary"
+          class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'cash-withdrawal'"
         >
           Cash Withdrawal
@@ -18,13 +18,13 @@
       </div>
       <div class="my-3">
         <button
-          class="mx-2 btn btn-lg btn-primary"
+          class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'balance-enquiry'"
         >
           Balance Enquiry
         </button>
         <button
-          class="mx-2 btn btn-lg btn-primary"
+          class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'mini-statement'"
         >
           Mini Statement

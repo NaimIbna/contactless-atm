@@ -1,9 +1,9 @@
 <template>
   <div class="container text-center my-5">
     <div v-if="step == 1">
-      <h2>Enter the amount:</h2>
+      <h1>Enter the amount:</h1>
       <input
-        class="my-5 form-control form-control-lg"
+        class="my-5 form-control form-control-lg user-input"
         type="text"
         placeholder="Enter Amount"
         aria-label=""
@@ -42,17 +42,20 @@
     <div v-else-if="step == 2">
       <h2>Do you want any printed receipt?</h2>
       <div class="my-5">
-        <button class="btn btn-primary btn-lg" @click="printReceipt()">
+        <button class="btn btn-primary btn-lg medium-btn mx-3" @click="printReceipt()">
           Yes
         </button>
-        <button class="btn btn-primary btn-lg" @click="printReceipt()">
+        <button class="btn btn-primary btn-lg medium-btn mx-3" @click="printReceipt()">
           No
         </button>
       </div>
     </div>
     <div v-else-if="step == 3">Processing...</div>
     <div v-else-if="step == 4">
-      <button class="btn btn-lg btn-success" @click="reloadPage()">
+      <h1>
+        Thank You!
+      </h1>
+      <button class="btn btn-lg btn-success medium-btn my-5" @click="reloadPage()">
         Back to home
       </button>
     </div>
@@ -98,7 +101,7 @@ export default {
 <style scoped>
 .keyboard {
   font-weight: 700;
-  font-size: 1.3em;
+  font-size: 2em;
 }
 .keyboard-row {
   display: flex;
@@ -106,16 +109,21 @@ export default {
 }
 .keyboard-column {
   cursor: pointer;
-  padding: 14px 70px;
-  margin: 5px 20px;
+  padding: 25px 100px;
+  margin: 10px 20px;
   border: 2px solid #111;
   border-radius: 5px;
 }
 
+.keyboard-column:hover{
+  background-color: #111;
+  color: #fff;
+}
+
 .back-btn {
-  padding: 14px 67px;
+  padding: 25px 95px;
 }
 .enter-btn {
-  padding: 14px 52px;
+  padding: 25px 71px;
 }
 </style>

@@ -30,6 +30,10 @@ export default {
       {
         rel: 'stylesheet',
         href: '/css/bootstrap.min.css'
+      },
+      {
+        rel: 'stylesheet',
+        href: '/css/main.css'
       }
     ],
     script: [{

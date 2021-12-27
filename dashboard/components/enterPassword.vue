@@ -1,7 +1,10 @@
 <template>
   <div class="container">
+    <h1>
+      Enter your PIN
+    </h1>
     <input
-      class="my-5 form-control form-control-lg"
+      class="my-5 form-control form-control-lg user-input"
       type="password"
       placeholder="PIN No"
       aria-label=""
@@ -62,7 +65,7 @@ export default {
 <style scoped>
 .keyboard {
   font-weight: 700;
-  font-size: 1.3em;
+  font-size: 2em;
 }
 .keyboard-row {
   display: flex;
@@ -70,16 +73,21 @@ export default {
 }
 .keyboard-column {
   cursor: pointer;
-  padding: 14px 70px;
-  margin: 5px 20px;
+  padding: 25px 100px;
+  margin: 10px 20px;
   border: 2px solid #111;
   border-radius: 5px;
 }
 
+.keyboard-column:hover{
+  background-color: #111;
+  color: #fff;
+}
+
 .back-btn {
-  padding: 14px 67px;
+  padding: 25px 95px;
 }
 .enter-btn {
-  padding: 14px 52px;
+  padding: 25px 71px;
 }
 </style>
