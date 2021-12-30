@@ -10,6 +10,9 @@
         v-model="amount"
         autofocus
       />
+      <div v-if="show500Error" class="alert alert-danger">
+        The entered amount has to be a Multiplier of 500
+      </div>
       <div class="mt-5">
         <div class="keyboard">
           <div class="keyboard-row">
@@ -42,20 +45,27 @@
     <div v-else-if="step == 2">
       <h2>Do you want any printed receipt?</h2>
       <div class="my-5">
-        <button class="btn btn-primary btn-lg medium-btn mx-3" @click="printReceipt()">
+        <button
+          class="btn btn-primary btn-lg medium-btn mx-3"
+          @click="printReceipt()"
+        >
           Yes
         </button>
-        <button class="btn btn-primary btn-lg medium-btn mx-3" @click="printReceipt()">
+        <button
+          class="btn btn-primary btn-lg medium-btn mx-3"
+          @click="printReceipt()"
+        >
           No
         </button>
       </div>
     </div>
     <div v-else-if="step == 3">Processing...</div>
     <div v-else-if="step == 4">
-      <h1>
-        Thank You!
-      </h1>
-      <button class="btn btn-lg btn-success medium-btn my-5" @click="reloadPage()">
+      <h1>Thank You!</h1>
+      <button
+        class="btn btn-lg btn-success medium-btn my-5"
+        @click="reloadPage()"
+      >
         Back to home
       </button>
     </div>
@@ -68,21 +78,48 @@ export default {
     return {
       amount: "",
       step: 1,
+      canEnterData: false,
+      show500Error: false,
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.canEnterData = true;
+    }, 700);
   },
   methods: {
     pressKey(val) {
+      if (!this.canEnterData) return;
+
       console.log(val);
       this.amount += val;
+
+      this.canEnterData = false;
+      setTimeout(() => {
+        this.canEnterData = true;
+      }, 700);
     },
     clearVal() {
+      if (!this.canEnterData) return;
+
       if (this.amount.length > 0)
         this.amount = this.amount.substr(0, this.amount.length - 1);
+
+      this.canEnterData = false;
+      setTimeout(() => {
+        this.canEnterData = true;
+      }, 700);
     },
     pressEnter() {
       console.log(this.amount);
-      //this.$emit('password-entered')
-      this.step = 2;
+      let val = parseInt(this.amount);
+      if (val % 500 == 0) {
+        this.show500Error = false;
+        //this.$emit('password-entered')
+        this.step = 2;
+      } else {
+        this.show500Error = true;
+      }
     },
     printReceipt() {
       this.step = 3;
@@ -113,9 +150,12 @@ export default {
   margin: 10px 20px;
   border: 2px solid #111;
   border-radius: 5px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
-.keyboard-column:hover{
+.keyboard-column:hover {
   background-color: #111;
   color: #fff;
 }

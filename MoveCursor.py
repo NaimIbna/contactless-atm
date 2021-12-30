@@ -3,6 +3,7 @@ import numpy as np
 import HandTrackingModule as htm
 import time
 import autopy
+import DashboardServer
 
 
 def run_hand_recognition():
@@ -25,6 +26,8 @@ def run_hand_recognition():
     # print(wScr, hScr)
 
     while True:
+        if(not DashboardServer.runCursorCamera):
+            break
         # 1. Find hand Landmarks
         success, img = cap.read()
         img = detector.findHands(img)

@@ -7,12 +7,15 @@
           class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'fund-transfer'"
         >
+          <img src="/two-arrows.png" class="btn-icon" alt="Fund Transfer" />
+          <br />
           Fund Transfer
         </button>
         <button
           class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'cash-withdrawal'"
         >
+          <img src="/money-withdrawal.png" class="btn-icon" alt="Cash" /><br />
           Cash Withdrawal
         </button>
       </div>
@@ -21,12 +24,14 @@
           class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'balance-enquiry'"
         >
+          <img src="/dollar.png" class="btn-icon" alt="Coin" /> <br />
           Balance Enquiry
         </button>
         <button
           class="mx-2 btn btn-lg btn-primary medium-btn"
           @click="pressedButton = 'mini-statement'"
         >
+          <img src="/bank.png" class="btn-icon" alt="MiniStatement" /> <br />
           Mini Statement
         </button>
       </div>
@@ -58,5 +63,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.medium-btn {
+  font-size: 1.9em;
+}
+.btn-icon {
+  width: 75px;
+  height: auto;
+  padding: 10px;
+}
 </style>

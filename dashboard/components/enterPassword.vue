@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <h1>
-      Enter your PIN
-    </h1>
+    <h1>Enter your PIN</h1>
     <input
       class="my-5 form-control form-control-lg user-input"
       type="password"
@@ -29,9 +27,13 @@
           <div class="keyboard-column" @click="pressKey('9')">9</div>
         </div>
         <div class="keyboard-row">
-          <div class="keyboard-column back-btn" @click="clearVal()">&#8592;</div>
+          <div class="keyboard-column back-btn" @click="clearVal()">
+            &#8592;
+          </div>
           <div class="keyboard-column" @click="pressKey('0')">0</div>
-          <div class="keyboard-column enter-btn" @click="pressEnter()">Enter</div>
+          <div class="keyboard-column enter-btn" @click="pressEnter()">
+            Enter
+          </div>
         </div>
       </div>
     </div>
@@ -43,21 +45,49 @@ export default {
   data() {
     return {
       password: "",
+      canEnterPassword: false,
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.canEnterPassword = true;
+    }, 700);
   },
   methods: {
     pressKey(val) {
+      if (!this.canEnterPassword) return;
+
       console.log(val);
-      this.password+=val
+      this.password += val;
+      this.canEnterPassword = false;
+      setTimeout(() => {
+        this.canEnterPassword = true;
+      }, 700);
     },
-    clearVal(){
-      if(this.password.length>0)
-        this.password = this.password.substr(0, this.password.length - 1)
+    clearVal() {
+      if (!this.canEnterPassword) return;
+      if (this.password.length > 0)
+        this.password = this.password.substr(0, this.password.length - 1);
+
+      this.canEnterPassword = false;
+      setTimeout(() => {
+        this.canEnterPassword = true;
+      }, 700);
     },
-    pressEnter(){
-      console.log(this.password);
-      this.$emit('password-entered')
-    }
+    async pressEnter() {
+      if (!this.password) return;
+      try {
+        var res = await this.$axios.$get("http://localhost:5009/api/user/" + this.password);
+        if(res=='UserNotFound' || !res.name) return;
+
+        localStorage.setItem("name", res.name);
+        localStorage.setItem("balance", res.balance);
+        localStorage.setItem("password", res.password);
+        localStorage.setItem("uname", res.uname);
+        console.log(res);
+        this.$emit("password-entered");
+      } catch {}
+    },
   },
 };
 </script>
@@ -77,9 +107,12 @@ export default {
   margin: 10px 20px;
   border: 2px solid #111;
   border-radius: 5px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
-.keyboard-column:hover{
+.keyboard-column:hover {
   background-color: #111;
   color: #fff;
 }
