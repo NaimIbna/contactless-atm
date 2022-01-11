@@ -32,22 +32,35 @@
 export default {
   data() {
     return {
-      loading: true,
+      loading: false,
       error: false,
+      intervalRes: null,
     };
   },
-  mounted(){
-
+  mounted() {
+    this.intervalRes = setInterval(() => {
+      this.startFaceRecognition();
+    }, 2000);
   },
   methods: {
     async startFaceRecognition() {
       try {
-        var res = await this.$axios.$get("http://localhost:5009/api/face-rec");
+        var res = await this.$axios.$get("http://localhost:5009/api/name");
         console.log(res);
+        let uname = localStorage.getItem("uname");
+        if (res == uname) {
+          this.error = false;
+        } else {
+          this.error = true;
+        }
+        this.loading = false;
       } catch {}
     },
     nextStep() {
-      if (!this.loading && !this.error) this.$emit("next-step");
+      if (!this.loading && !this.error) {
+        clearInterval(this.intervalRes);
+        this.$emit("next-step");
+      }
     },
   },
 };
