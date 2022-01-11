@@ -1,17 +1,34 @@
 import cv2
-import face_recognition
+import mediapipe as mp
+mp_face_detection = mp.solutions.face_detection
+mp_drawing = mp.solutions.drawing_utils
 
-img = cv2.imread("Messi1.webp")
-rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-img_encoding = face_recognition.face_encodings(rgb_img)[0]
 
-img2 = cv2.imread("images/Messi.webp")
-rgb_img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
-img_encoding2 = face_recognition.face_encodings(rgb_img2)[0]
+# For webcam input:
+cap = cv2.VideoCapture(0)
+with mp_face_detection.FaceDetection(
+    model_selection=0, min_detection_confidence=0.5) as face_detection:
+  while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+      print("Ignoring empty camera frame.")
+      # If loading a video, use 'break' instead of 'continue'.
+      continue
 
-result = face_recognition.compare_faces([img_encoding], img_encoding2)
-print("Result: ", result)
+    # To improve performance, optionally mark the image as not writeable to
+    # pass by reference.
+    image.flags.writeable = False
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    results = face_detection.process(image)
 
-cv2.imshow("Img", img)
-cv2.imshow("Img 2", img2)
-cv2.waitKey(0)
+    # Draw the face detection annotations on the image.
+    image.flags.writeable = True
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+    if results.detections:
+      for detection in results.detections:
+        mp_drawing.draw_detection(image, detection)
+    # Flip the image horizontally for a selfie-view display.
+    cv2.imshow('MediaPipe Face Detection', cv2.flip(image, 1))
+    if cv2.waitKey(5) & 0xFF == 27:
+      break
+cap.release()

@@ -77,13 +77,20 @@ export default {
     async pressEnter() {
       if (!this.password) return;
       try {
-        var res = await this.$axios.$get("http://localhost:5009/api/user/" + this.password);
-        if(res=='UserNotFound' || !res.name) return;
-
+        let res = null;
+        for (let i = 0; i < this.$store.state.allUsers.length; i++) {
+          if (this.$store.state.allUsers[i].password == this.password) {
+            res = this.$store.state.allUsers[i];
+            res["i"] = i;
+            break;
+          }
+        }
+        if (!res) return;
         localStorage.setItem("name", res.name);
         localStorage.setItem("balance", res.balance);
         localStorage.setItem("password", res.password);
         localStorage.setItem("uname", res.uname);
+        localStorage.setItem("i", res.i);
         console.log(res);
         this.$emit("password-entered");
       } catch {}

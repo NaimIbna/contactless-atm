@@ -36,7 +36,9 @@
         </button>
       </div>
     </div>
-    <div v-else-if="pressedButton == 'fund-transfer'"></div>
+    <div v-else-if="pressedButton == 'fund-transfer'">
+      <fund-transfer />
+    </div>
     <div v-else-if="pressedButton == 'cash-withdrawal'">
       <cash-withdrawal />
     </div>
@@ -52,9 +54,10 @@
 <script>
 import balanceEnquiry from "./balanceEnquiry.vue";
 import CashWithdrawal from "./cashWithdrawal.vue";
+import FundTransfer from "./fundTransfer.vue";
 import MiniStatement from "./miniStatement.vue";
 export default {
-  components: { balanceEnquiry, MiniStatement, CashWithdrawal },
+  components: { balanceEnquiry, MiniStatement, CashWithdrawal, FundTransfer },
   data() {
     return {
       pressedButton: "",

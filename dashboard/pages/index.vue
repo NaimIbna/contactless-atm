@@ -16,12 +16,15 @@
         </button>
       </div>
       <div v-else-if="step == 2">
-        <enter-password v-on:password-entered="step = 3" />
+        <rfid-scan v-on:rfid-entered="step = 3" />
       </div>
       <div v-else-if="step == 3">
-        <face-recognition v-on:next-step="step = 4" />
+        <enter-password v-on:password-entered="step = 4" />
       </div>
       <div v-else-if="step == 4">
+        <face-recognition v-on:next-step="step = 5" />
+      </div>
+      <div v-else-if="step == 5">
         <select-transaction />
       </div>
     </div>
@@ -30,12 +33,13 @@
 
 <script>
 import enterPassword from "../components/enterPassword.vue";
+import RfidScan from '../components/rfidScan.vue';
 export default {
-  components: { enterPassword },
+  components: { enterPassword, RfidScan },
   name: "IndexPage",
   data() {
     return {
-      step: 1,
+      step: 4,
     };
   },
   methods: {
